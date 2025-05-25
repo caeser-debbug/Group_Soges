@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sécurité Aéroportuaire - Group Soges International</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.2.0/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.2.0/swiper-bundle.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'soges-gold': '#d1a874',
+                        'soges-dark': '#1a202c',
+                        'soges-light': '#f7f7f7',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7));
+        }
+        
+        .transition-transform {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .service-section {
+            transition: all 0.3s ease;
+        }
+        
+        .service-section:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .service-icon {
+            transition: all 0.3s ease;
+        }
+
+        .service-section:hover .service-icon {
+            color: white;
+            background-color: #d1a874;
+        }
+
+        .group:hover .group-hover\:visible {
+            visibility: visible;
+        }
+
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+        }
+
+        /* Ajouter une petite flèche au menu déroulant */
+        .group-hover\:visible::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 12px;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid white;
+        }
+
+        /* Animation pour le menu mobile */
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Responsive text sizing */
+        @media (max-width: 640px) {
+            .page-header h1 {
+                font-size: 1.75rem !important;
+            }
+            
+            .service-section h3 {
+                font-size: 1.25rem !important;
+            }
+        }
+
+        /* Fix for CTA buttons on small screens */
+        @media (max-width: 480px) {
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .cta-buttons a {
+                width: 100%;
+                margin-bottom: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-soges-light">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="mr-2 sm:mr-3">
+                        <img src="../images/logo2.jpg" alt="Group Soges Logo" class="h-10 w-10 sm:h-14 sm:w-14 object-contain">
+                    </div>
+                    <div>
+                        <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-soges-gold">GROUP SOGES</h1>
+                        <p class="text-xs md:text-sm text-gray-600 italic">Votre Sécurité et votre propriété sont notre Affaire</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="../index.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">Accueil</a>
+                    <a href="../a_propos.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">À propos</a>
+                    
+                    <!-- Nouveau menu déroulant pour Sécurité -->
+                    <div class="relative group">
+                        <button class="text-gray-800 hover:text-soges-gold font-medium transition-colors flex items-center">
+                            Sécurité
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="securite-site-prive.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Sécurité Site Privé</a>
+                            <a href="securite-site-public.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Sécurité Site Public</a>
+                            <a href="securite-videosurvaillance.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Vidéosurveillance</a>
+                            <a href="securite-incendie.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Sécurité Incendie</a>
+                            <a href="escorte-convoyage.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Escorte et Convoyage</a>
+                            <a href="entretien-salubrite.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Entretien et Salubrite</a>
+                            <a href="hydrocarbures.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Hydrocarbures</a>
+                            <a href="formation.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Formation</a>
+                            <a href="btp-hydraulique.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">BTP et Hydraulique</a>
+                            <a href="import-export.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Import-Export</a>
+                            <a href="securite-aeroportuaire.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Securite aeroportuaire</a>
+                        </div>
+                    </div>
+                    
+                    <a href="../service.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">Services</a>
+                    <a href="../equipement.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">Équipements</a>
+                    <a href="../contact.html" class="bg-soges-gold text-white px-4 py-2 rounded hover:bg-opacity-80 transition-all">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-2 pb-2">
+                <a href="../index.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Accueil</a>
+                <a href="../a_propos.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">À propos</a>
+                
+                <!-- Sous-menu Sécurité pour mobile -->
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="flex justify-between items-center w-full py-2 text-gray-800 hover:text-soges-gold transition-colors">
+                        Sécurité
+                        <svg class="w-4 h-4 ml-1" :class="{'transform rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="open" class="pl-4 mt-1 space-y-1">
+                        <a href="securite-site-prive.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Sécurité Site Privé</a>
+                        <a href="securite-site-public.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Sécurité Site Public</a>
+                        <a href="securite-videosurvaillance.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Vidéosurveillance</a>
+                        <a href="securite-incendie.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Sécurité Incendie</a>
+                        <a href="escorte-convoyage.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Escorte et Convoyage</a>
+                        <a href="entretien-salubrite.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Entretien et Salubrite</a>
+                        <a href="hydrocarbures.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Hydrocarbures</a>
+                        <a href="formation.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Formation</a>
+                        <a href="btp-hydraulique.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">BTP et Hydraulique</a>
+                        <a href="import-export.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Import-Export</a>
+                        <a href="securite-aeroportuaire.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Securite aeroportuaire</a>
+                    </div>
+                </div>
+                
+                <a href="../service.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Services</a>
+                <a href="../equipement.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Équipements</a>
+                <a href="../contact.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="pt-24 md:pt-32 pb-10 md:pb-16 bg-soges-dark relative">
+        <div class="absolute inset-0 opacity-30">
+            <img src="../images/agent-securite-aeroport-souriant-tenant-detecteur-metaux-dans-terminal-aeroport_107420-95848.avif" alt="Airport Security Background" class="w-full h-full object-cover">
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="page-header text-center text-white">
+                <h1 class="text-3xl md:text-5xl font-bold mb-4" data-aos="fade-up">Sécurité Aéroportuaire</h1>
+                <div class="w-16 h-1 bg-soges-gold mx-auto mb-4"></div>
+                <p class="text-lg max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Des solutions de sécurité spécialisées pour les infrastructures aéroportuaires, assurant la protection des passagers et des installations
+                </p>
+                <nav class="mt-6 text-sm md:text-base" data-aos="fade-up" data-aos-delay="200">
+                    <ol class="flex justify-center items-center space-x-2">
+                        <li><a href="../index.html" class="hover:text-soges-gold transition-colors">Accueil</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li><a href="../service.html" class="hover:text-soges-gold transition-colors">Services</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li class="text-soges-gold">Sécurité Aéroportuaire</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction au Service -->
+    <section class="py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center mb-12" data-aos="fade-up">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">Notre Expertise en Sécurité Aéroportuaire</h2>
+                <div class="w-16 h-1 bg-soges-gold mx-auto mb-6"></div>
+                <p class="text-gray-700">
+                    Avec plus de 14 ans d'expérience, Group Soges International a développé une expertise pointue dans le domaine de la sécurité aéroportuaire. Nos équipes spécialisées assurent la prévention et la sécurité dans les aéroports grâce à des mesures strictes de contrôle et de surveillance, garantissant la protection des passagers, du personnel et des infrastructures.
+                </p>
+            </div>
+            
+            <!-- Aperçu du Service en Chiffres -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12">
+                <div class="bg-soges-light rounded-lg p-6 text-center shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-16 h-16 bg-soges-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users-cog text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-2">250+</h3>
+                    <p class="text-gray-700">Agents formés en sécurité aéroportuaire</p>
+                </div>
+                
+                <div class="bg-soges-light rounded-lg p-6 text-center shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-16 h-16 bg-soges-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-plane text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-2">15+</h3>
+                    <p class="text-gray-700">Années d'expérience dans les aéroports</p>
+                </div>
+                
+                <div class="bg-soges-light rounded-lg p-6 text-center shadow-md" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 bg-soges-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-shield-alt text-white text-2xl"></i>
+                    </div>
+                    <h3 class="text-3xl font-bold mb-2">100%</h3>
+                    <p class="text-gray-700">Conformité aux standards internationaux</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Détail des Services de Sécurité Aéroportuaire -->
+    <section class="py-12 md:py-16 bg-soges-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4" data-aos="fade-up">Nos Services Spécialisés</h2>
+            <div class="w-16 h-1 bg-soges-gold mx-auto mb-12"></div>
+            
+            <!-- Service 1: Contrôle d'Accès -->
+            <div class="service-section bg-white rounded-lg shadow-lg overflow-hidden mb-10" data-aos="fade-up">
+                <div class="md:flex">
+                    <div class="md:w-1/3">
+                        <img src="../images/agent-securite-aeroport-souriant-tenant-detecteur-metaux-dans-terminal-aeroport_107420-95848.avif" alt="Contrôle d'Accès Aéroportuaire" class="w-full h-64 md:h-full object-cover">
+                    </div>
+                    <div class="p-6 md:w-2/3">
+                        <div class="flex items-start mb-4">
+                            <div class="service-icon w-12 h-12 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-id-card text-xl text-soges-gold"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-soges-gold">Contrôle d'Accès Aéroportuaire</h3>
+                        </div>
+                        <p class="text-gray-700 mb-6">
+                            Nous mettons en place des systèmes rigoureux de contrôle d'accès pour assurer que seules les personnes autorisées peuvent accéder aux différentes zones de l'aéroport, en particulier les zones réglementées et sensibles.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <h4 class="font-semibold mb-2">Nos solutions incluent :</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Vérification des badges d'identification</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Contrôle des accès aux zones réservées</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Surveillance des portes et des points d'entrée</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Gestion des flux de passagers et de personnel</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Technologies utilisées :</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Lecteurs de badges biométriques</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Systèmes de contrôle d'accès automatisés</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Portiques et tourniquets sécurisés</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Logiciel de traçabilité des accès</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 5: Protection des Infrastructures -->
+            <div class="service-section bg-white rounded-lg shadow-lg overflow-hidden mb-10" data-aos="fade-up">
+                <div class="md:flex">
+                    <div class="md:w-1/3">
+                        <img src="../images/aero.jpg" alt="Protection des Infrastructures" class="w-full h-64 md:h-full object-cover">
+                    </div>
+                    <div class="p-6 md:w-2/3">
+                        <div class="flex items-start mb-4">
+                            <div class="service-icon w-12 h-12 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-building text-xl text-soges-gold"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-soges-gold">Protection des Infrastructures</h3>
+                        </div>
+                        <p class="text-gray-700 mb-6">
+                            Nous mettons en œuvre des stratégies complètes pour protéger les infrastructures aéroportuaires critiques contre diverses menaces, des catastrophes naturelles aux actes malveillants.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <h4 class="font-semibold mb-2">Infrastructures protégées :</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Tours de contrôle</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Systèmes informatiques et de navigation</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Centrales électriques et utilités</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Terminaux de passagers</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Centres de communication</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Mesures de protection :</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Barrières physiques et électroniques</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Systèmes de redondance</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Plans d'urgence et de continuité</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Protection contre les cyberattaques</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 6: Intervention d'Urgence -->
+            <div class="service-section bg-white rounded-lg shadow-lg overflow-hidden mb-10" data-aos="fade-up">
+                <div class="md:flex">
+                    <div class="md:w-1/3 md:order-2">
+                        <img src="../images/intervention.jpg" alt="Intervention d'Urgence" class="w-full h-64 md:h-full object-cover">
+                    </div>
+                    <div class="p-6 md:w-2/3 md:order-1">
+                        <div class="flex items-start mb-4">
+                            <div class="service-icon w-12 h-12 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-ambulance text-xl text-soges-gold"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-soges-gold">Intervention d'Urgence</h3>
+                        </div>
+                        <p class="text-gray-700 mb-6">
+                            Nos équipes d'intervention rapide sont formées pour répondre efficacement à toute situation d'urgence dans l'environnement aéroportuaire, minimisant les risques et assurant la sécurité de tous.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <h4 class="font-semibold mb-2">Types d'interventions :</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Incidents de sécurité</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Urgences médicales</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Évacuations d'urgence</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Gestion de crises</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Alertes à la bombe</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Notre préparation :</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Personnel formé aux premiers secours</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Équipes d'intervention tactique</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Exercices réguliers de simulation</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Coordination avec les services d'urgence</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 7: Formation du Personnel Aéroportuaire -->
+            <div class="service-section bg-white rounded-lg shadow-lg overflow-hidden" data-aos="fade-up">
+                <div class="md:flex">
+                    <div class="md:w-1/3">
+                        <img src="../images/forma_aero.jpg" alt="Formation du Personnel Aéroportuaire" class="w-full h-64 md:h-full object-cover">
+                    </div>
+                    <div class="p-6 md:w-2/3">
+                        <div class="flex items-start mb-4">
+                            <div class="service-icon w-12 h-12 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-chalkboard-teacher text-xl text-soges-gold"></i>
+                            </div>
+                            <h3 class="text-xl md:text-2xl font-bold text-soges-gold">Formation du Personnel Aéroportuaire</h3>
+                        </div>
+                        <p class="text-gray-700 mb-6">
+                            Nous proposons des programmes de formation complets pour le personnel aéroportuaire, couvrant tous les aspects de la sécurité et de la gestion des risques en environnement aéroportuaire.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <h4 class="font-semibold mb-2">Programmes de formation :</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Formation initiale en sécurité aéroportuaire</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Recyclage et mise à jour des compétences</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Formation aux nouvelles technologies</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Gestion de crise et situations d'urgence</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                        <span>Sensibilisation à la cybersécurité</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Méthodes pédagogiques :</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Formations théoriques et pratiques</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Simulations et jeux de rôle</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>E-learning et modules interactifs</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-circle text-soges-gold text-xs mr-2"></i>
+                                        <span>Ateliers de partage d'expérience</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Équipements Spécialisés -->
+    <section class="py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-4" data-aos="fade-up">Équipements Spécialisés</h2>
+            <div class="w-16 h-1 bg-soges-gold mx-auto mb-6"></div>
+            <p class="text-gray-700 max-w-3xl mx-auto text-center mb-12" data-aos="fade-up" data-aos-delay="100">
+                Group Soges International utilise des équipements de pointe pour assurer une sécurité optimale dans les infrastructures aéroportuaires.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Équipement 1 -->
+                <div class="bg-soges-light rounded-lg p-6 shadow-md" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-soges-gold rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-search text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Équipements de Détection</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Détecteurs sophistiqués pour assurer un niveau élevé de sécurité et de détection des menaces potentielles.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Détecteurs de métaux fixes et portatifs</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Scanners corporels à ondes millimétriques</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Détecteurs d'explosifs et de substances illicites</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Équipements de détection de documents frauduleux</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Équipement 2 -->
+                <div class="bg-soges-light rounded-lg p-6 shadow-md" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-soges-gold rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-video text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Systèmes de Surveillance</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Solutions de vidéosurveillance avancées pour une surveillance continue et efficace de toutes les zones de l'aéroport.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Caméras haute définition et infrarouge</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Systèmes de reconnaissance faciale</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Logiciels d'analyse vidéo intelligente</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Centres de surveillance opérationnels 24/7</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Équipement 3 -->
+                <div class="bg-soges-light rounded-lg p-6 shadow-md" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-soges-gold rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-comments text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Équipements de Communication</h3>
+                    </div>
+                    <p class="text-gray-700 mb-4">
+                        Systèmes de communication sécurisés permettant une coordination efficace entre les équipes de sécurité.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Radios numériques cryptées</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Systèmes d'annonce d'urgence</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Liaisons directes avec les autorités</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check text-soges-gold mr-2"></i>
+                            <span>Applications mobiles de coordination</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Notre Expertise et Conformité -->
+    <section class="py-12 md:py-16 bg-soges-light">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-4" data-aos="fade-up">Notre Expertise et Conformité</h2>
+                <div class="w-16 h-1 bg-soges-gold mx-auto mb-12"></div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-8" data-aos="fade-up">
+                    <div class="mb-8">
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-certificate text-soges-gold mr-3"></i>
+                            Certifications et Accréditations
+                        </h3>
+                        <p class="text-gray-700 mb-4">
+                            Group Soges International répond aux normes les plus strictes en matière de sécurité aéroportuaire. Nos services sont conformes aux réglementations internationales et régionales, garantissant la qualité et l'efficacité de nos prestations.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Certification ISO 9001 pour la gestion de la qualité</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Conformité aux normes de l'OACI</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Habilitations de sécurité gouvernementales</span>
+                                </li>
+                            </ul>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Certifications en sûreté aéroportuaire</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Agréments des autorités de l'aviation civile</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Formation aux standards internationaux</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 flex items-center">
+                            <i class="fas fa-users-cog text-soges-gold mr-3"></i>
+                            Notre Équipe de Professionnels
+                        </h3>
+                        <p class="text-gray-700 mb-4">
+                            Notre force réside dans notre équipe de professionnels hautement qualifiés et expérimentés, formés spécifiquement aux enjeux de la sécurité aéroportuaire.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <h4 class="font-semibold mb-2">Profils de nos experts :</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-user-shield text-soges-gold mr-2"></i>
+                                        <span>Anciens personnels des forces de sécurité</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-user-shield text-soges-gold mr-2"></i>
+                                        <span>Spécialistes en sûreté aéroportuaire</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-user-shield text-soges-gold mr-2"></i>
+                                        <span>Experts en analyse des risques</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-user-shield text-soges-gold mr-2"></i>
+                                        <span>Formateurs certifiés</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold mb-2">Formation continue :</h4>
+                                <ul class="space-y-2">
+                                    <li class="flex items-center">
+                                        <i class="fas fa-graduation-cap text-soges-gold mr-2"></i>
+                                        <span>Mise à jour régulière des compétences</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-graduation-cap text-soges-gold mr-2"></i>
+                                        <span>Entraînements pratiques mensuels</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-graduation-cap text-soges-gold mr-2"></i>
+                                        <span>Formations sur les nouvelles menaces</span>
+                                    </li>
+                                    <li class="flex items-center">
+                                        <i class="fas fa-graduation-cap text-soges-gold mr-2"></i>
+                                        <span>Partage des meilleures pratiques</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section class="py-12 md:py-16 bg-soges-dark relative">
+        <div class="absolute inset-0 opacity-20">
+            <img src="../images/aero.jpg" alt="Background" class="w-full h-full object-cover">
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4" data-aos="fade-up">Besoin d'une Solution de Sécurité Aéroportuaire Sur Mesure?</h2>
+                <p class="text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    Contactez-nous dès aujourd'hui pour discuter de vos besoins spécifiques en matière de sécurité aéroportuaire. Nos experts sont à votre disposition pour élaborer des solutions adaptées à vos infrastructures.
+                </p>
+                <div class="cta-buttons flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+                    <a href="../contact.html" class="bg-soges-gold hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-md transition-all inline-flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Demander un devis
+                    </a>
+                    <a href="tel:+22798380404" class="border-2 border-white text-white hover:bg-white hover:text-soges-dark font-semibold py-3 px-8 rounded-md transition-all inline-flex items-center justify-center">
+                        <i class="fas fa-phone-alt mr-2"></i>
+                        Appeler maintenant
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-soges-dark text-white pt-12 pb-6 sm:pt-16 sm:pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 sm:mb-12">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center mb-4 sm:mb-6">
+                        <img src="../images/logo.jpg" alt="Group Soges Logo" class="h-10 w-10 sm:h-12 sm:w-12 object-contain mr-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-soges-gold">GROUP SOGES</h3>
+                            <p class="text-xs text-gray-400">INTERNATIONAL</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        Votre partenaire de confiance pour tous vos besoins de sécurité et d'entretien depuis plus de 14 ans en Afrique de l'Ouest.
+                    </p>
+                    <p class="text-gray-400 font-semibold text-sm">
+                        Votre Sécurité et votre propriété sont notre Affaire
+                    </p>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold text-soges-gold mb-4 sm:mb-6">Contactez-nous</h3>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Quartier Terminus en Face du Ministre de l'Environnement, Niamey, Niger
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                sogesniger_securite@yahoo.com
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                20 33 07 99 / 98 38 04 04
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Lun-Ven: 8h-18h, Sam: 9h-13h
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-soges-gold mb-4 sm:mb-6">Liens Rapides</h3>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li>
+                            <a href="../index.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../a_propos.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                À propos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../services.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../equipement.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Équipements
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../contact.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold text-soges-gold mb-4 sm:mb-6">Autres Services</h3>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li>
+                            <a href="securite-site-prive.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Sécurité Site Privé
+                            </a>
+                        </li>
+                        <li>
+                            <a href="securite-site-public.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Sécurité Site Public
+                            </a>
+                        </li>
+                        <li>
+                            <a href="securite-videosurvaillance.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Vidéosurveillance
+                            </a>
+                        </li>
+                        <li>
+                            <a href="entretien-salubrite.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Entretien et Salubrité
+                            </a>
+                        </li>
+                        <li>
+                            <a href="hydrocarbures.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Hydrocarbures
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 sm:pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-xs sm:text-sm mb-3 md:mb-0">
+                        © 2025 GROUP SOGES INTERNATIONAL. Tous droits réservés.
+                    </p>
+                    <p class="text-gray-500 text-xs sm:text-sm">
+                        Conçu et développé par <a href="#" class="text-soges-gold hover:underline">NETCRAFTER</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="back-to-top" class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 bg-soges-gold text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg transition-all transform scale-0 hover:bg-opacity-80 z-50">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Initialisation d'Alpine.js pour les menus mobiles
+        document.addEventListener('alpine:init', () => {
+            // Tout est prêt
+        });
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false,
+                disable: window.innerWidth < 768 ? true : false // Disable on mobile for better performance
+            });
+            
+            // Back to Top Button with better performance
+            const backToTopButton = document.getElementById('back-to-top');
+            let isScrolling = false;
+            
+            window.addEventListener('scroll', function() {
+                if (!isScrolling) {
+                    isScrolling = true;
+                    
+                    // Use requestAnimationFrame for smoother animation
+                    requestAnimationFrame(function() {
+                        if (window.pageYOffset > 300) {
+                            backToTopButton.classList.remove('scale-0');
+                            backToTopButton.classList.add('scale-100');
+                        } else {
+                            backToTopButton.classList.remove('scale-100');
+                            backToTopButton.classList.add('scale-0');
+                        }
+                        
+                        isScrolling = false;
+                    });
+                }
+            });
+
+            // Smooth scrolling for anchor links with better performance
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Calculate offset based on screen size
+                        const offset = window.innerWidth < 768 ? 80 : 100;
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add resize listener for better responsiveness
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+                
+                // Update AOS for screen resizes
+                AOS.refresh();
+            });
+        });
+    </script>
+</body>
+</html>

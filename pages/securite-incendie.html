@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sécurité Incendie - Group Soges International</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.2.0/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.2.0/swiper-bundle.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'soges-gold': '#d1a874',
+                        'soges-dark': '#1a202c',
+                        'soges-light': '#f7f7f7',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7));
+        }
+        
+        .transition-transform {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .service-detail {
+            transition: all 0.3s ease;
+        }
+        
+        .service-detail:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .service-icon {
+            transition: all 0.3s ease;
+        }
+
+        .service-detail:hover .service-icon {
+            color: white;
+            background-color: #d1a874;
+        }
+
+        .group:hover .group-hover\:visible {
+            visibility: visible;
+        }
+
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+        }
+
+        /* Ajouter une petite flèche au menu déroulant */
+        .group-hover\:visible::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 12px;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid white;
+        }
+
+        /* Animation pour le menu mobile */
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Responsive text sizing */
+        @media (max-width: 640px) {
+            .page-header h1 {
+                font-size: 1.75rem !important;
+            }
+            
+            .service-detail h3 {
+                font-size: 1.25rem !important;
+            }
+        }
+
+        /* Fix for CTA buttons on small screens */
+        @media (max-width: 480px) {
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .cta-buttons a {
+                width: 100%;
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        /* Styles spécifiques pour la page Sécurité Incendie */
+        .feature-item {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover .feature-icon {
+            background-color: #d1a874;
+            color: white;
+        }
+        
+        .service-image {
+            transition: transform 0.5s ease;
+        }
+        
+        .section-service:hover .service-image {
+            transform: scale(1.05);
+        }
+        
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stats-item {
+            transition: all 0.3s ease;
+        }
+        
+        .stats-item:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-soges-light">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="mr-2 sm:mr-3">
+                        <img src="../images/logo2.jpg" alt="Group Soges Logo" class="h-10 w-10 sm:h-14 sm:w-14 object-contain">
+                    </div>
+                    <div>
+                        <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-soges-gold">GROUP SOGES</h1>
+                        <p class="text-xs md:text-sm text-gray-600 italic">Votre Sécurité et votre propriété sont notre Affaire</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="../index.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">Accueil</a>
+                    <a href="../a_propos.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">À propos</a>
+                    
+                    <!-- Nouveau menu déroulant pour Sécurité -->
+                    <div class="relative group">
+                        <button class="text-gray-800 hover:text-soges-gold font-medium transition-colors flex items-center">
+                            Sécurité
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="securite-site-prive.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Sécurité Site Privé</a>
+                            <a href="securite-site-public.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Sécurité Site Public</a>
+                            <a href="securite-videosurvaillance.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Vidéosurveillance</a>
+                            <a href="securite-incendie.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Sécurité Incendie</a>
+                            <a href="escorte-convoyage.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Escorte et Convoyage</a>
+                            <a href="entretien-salubrite.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Entretien et Salubrite</a>
+                            <a href="hydrocarbures.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Hydrocarbures</a>
+                            <a href="formation.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Formation</a>
+                            <a href="btp-hydraulique.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">BTP et Hydraulique</a>
+                            <a href="import-export.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Import-Export</a>
+                            <a href="securite-aeroportuaire.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Securite aeroportuaire</a>
+                        </div>
+                    </div>
+                    
+                    <a href="../service.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">Services</a>
+                    <a href="../equipement.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">Équipements</a>
+                    <a href="../contact.html" class="bg-soges-gold text-white px-4 py-2 rounded hover:bg-opacity-80 transition-all">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-2 pb-2">
+                <a href="../index.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Accueil</a>
+                <a href="../a_propos.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">À propos</a>
+                
+                <!-- Sous-menu Sécurité pour mobile -->
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="flex justify-between items-center w-full py-2 text-gray-800 hover:text-soges-gold transition-colors">
+                        Sécurité
+                        <svg class="w-4 h-4 ml-1" :class="{'transform rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="open" class="pl-4 mt-1 space-y-1">
+                        <a href="securite-site-prive.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Sécurité Site Privé</a>
+                        <a href="securite-site-public.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Sécurité Site Public</a>
+                        <a href="securite-videosurvaillance.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Vidéosurveillance</a>
+                        <a href="securite-incendie.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Sécurité Incendie</a>
+                        <a href="escorte-convoyage.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Escorte et Convoyage</a>
+                        <a href="entretien-salubrite.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Entretien et Salubrite</a>
+                        <a href="hydrocarbures.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Hydrocarbures</a>
+                        <a href="formation.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Formation</a>
+                        <a href="btp-hydraulique.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">BTP et Hydraulique</a>
+                        <a href="import-export.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Import-Export</a>
+                        <a href="securite-aeroportuaire.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Securite aeroportuaire</a>
+                    </div>
+                </div>
+                
+                <a href="../service.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Services</a>
+                <a href="../equipement.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Équipements</a>
+                <a href="../contact.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="pt-24 md:pt-32 pb-10 md:pb-16 bg-soges-dark relative">
+        <div class="absolute inset-0 opacity-30">
+            <img src="images/incendie.png" alt="Sécurité Incendie Background" class="w-full h-full object-cover">
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="page-header text-center text-white">
+                <h1 class="text-3xl md:text-5xl font-bold mb-4" data-aos="fade-up">Sécurité Incendie</h1>
+                <div class="w-16 h-1 bg-soges-gold mx-auto mb-4"></div>
+                <p class="text-lg max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Des solutions complètes de prévention et de protection contre les incendies pour garantir la sécurité de vos installations et de votre personnel
+                </p>
+                <nav class="mt-6 text-sm md:text-base" data-aos="fade-up" data-aos-delay="200">
+                    <ol class="flex justify-center items-center space-x-2">
+                        <li><a href="../index.html" class="hover:text-soges-gold transition-colors">Accueil</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li><a href="../service.html" class="hover:text-soges-gold transition-colors">Services</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li class="text-soges-gold">Sécurité Incendie</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Protection Contre les Risques d'Incendie</h2>
+                    <div class="w-16 h-1 bg-soges-gold mx-auto mb-6"></div>
+                    <p class="text-gray-700">
+                        Face aux risques d'incendie qui menacent les vies humaines et les biens, Group Soges International propose des services spécialisés de sécurité incendie. Notre expertise s'étend du diagnostic des risques à l'installation des équipements de protection, en passant par la formation de votre personnel aux gestes qui sauvent.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Feature 1 -->
+                    <div class="feature-item bg-soges-light rounded-lg p-6 shadow-md">
+                        <div class="feature-icon w-16 h-16 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <i class="fas fa-search text-2xl text-soges-gold"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-center mb-3">Diagnostic des Risques</h3>
+                        <p class="text-gray-700 text-center">
+                            Évaluation complète de vos installations pour identifier les vulnérabilités et les risques potentiels d'incendie.
+                        </p>
+                    </div>
+                    
+                    <!-- Feature 2 -->
+                    <div class="feature-item bg-soges-light rounded-lg p-6 shadow-md">
+                        <div class="feature-icon w-16 h-16 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <i class="fas fa-shield-alt text-2xl text-soges-gold"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-center mb-3">Protection Optimale</h3>
+                        <p class="text-gray-700 text-center">
+                            Solutions sur mesure adaptées à vos locaux et à vos besoins spécifiques pour une sécurité maximale.
+                        </p>
+                    </div>
+                    
+                    <!-- Feature 3 -->
+                    <div class="feature-item bg-soges-light rounded-lg p-6 shadow-md">
+                        <div class="feature-icon w-16 h-16 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mb-4 mx-auto">
+                            <i class="fas fa-graduation-cap text-2xl text-soges-gold"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-center mb-3">Formation du Personnel</h3>
+                        <p class="text-gray-700 text-center">
+                            Programmes de formation certifiés pour que votre équipe puisse réagir efficacement en cas d'urgence.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Services Détaillés - Section 3: Paramétrage de Systèmes -->
+    <section id="parametrage" class="py-12 md:py-16 bg-soges-light section-service">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8" data-aos="fade-right">
+                        <div class="overflow-hidden rounded-lg shadow-lg">
+                            <img src="../images/incendie.png" alt="Paramétrage système de sécurité incendie" class="w-full h-auto service-image">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2" data-aos="fade-left">
+                        <h3 class="text-2xl font-bold text-soges-gold mb-4">Paramétrage de Systèmes de Sécurité</h3>
+                        <div class="w-16 h-1 bg-soges-gold mb-6"></div>
+                        <p class="text-gray-700 mb-6">
+                            Nous configurons et paramétrons vos systèmes de sécurité incendie pour garantir leur efficacité optimale et leur conformité aux normes en vigueur.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <i class="fas fa-cogs text-soges-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Configuration sur mesure</h4>
+                                    <p class="text-gray-700 text-sm">Paramétrage personnalisé des systèmes d'alarme et de détection selon la configuration de vos locaux.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <i class="fas fa-network-wired text-soges-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Intégration des systèmes</h4>
+                                    <p class="text-gray-700 text-sm">Intégration de vos systèmes de sécurité incendie avec vos autres systèmes de sécurité pour une gestion centralisée.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <i class="fas fa-mobile-alt text-soges-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Alertes à distance</h4>
+                                    <p class="text-gray-700 text-sm">Configuration des alertes et notifications en temps réel sur vos appareils mobiles en cas de détection d'incendie.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Détaillés - Section 4: Système d'Alerte -->
+    <section id="alerte" class="py-12 md:py-16 bg-white section-service">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="flex flex-col md:flex-row-reverse items-center">
+                    <div class="md:w-1/2 mb-8 md:mb-0 md:pl-8" data-aos="fade-left">
+                        <div class="overflow-hidden rounded-lg shadow-lg">
+                            <img src="../images/alarme.jpg" alt="Système d'alerte incendie" class="w-full h-auto service-image">
+                        </div>
+                    </div>
+                    <div class="md:w-1/2" data-aos="fade-right">
+                        <h3 class="text-2xl font-bold text-soges-gold mb-4">Système d'Alerte Incendie</h3>
+                        <div class="w-16 h-1 bg-soges-gold mb-6"></div>
+                        <p class="text-gray-700 mb-6">
+                            Nos systèmes d'alerte incendie avancés permettent une détection précoce des départs de feu et garantissent une réaction rapide pour minimiser les dommages.
+                        </p>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <i class="fas fa-eye text-soges-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Détection précoce</h4>
+                                    <p class="text-gray-700 text-sm">Capteurs haute sensibilité pour détecter les signes précurseurs d'incendie avant qu'il ne se développe.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <i class="fas fa-broadcast-tower text-soges-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Alertes multicanaux</h4>
+                                    <p class="text-gray-700 text-sm">Système d'alerte diffusant simultanément des notifications sonores, visuelles et électroniques.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 h-8 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mt-1 mr-4 flex-shrink-0">
+                                    <i class="fas fa-link text-soges-gold"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold mb-1">Connexion directe brigade Soges</h4>
+                                    <p class="text-gray-700 text-sm">Liaison avec notre équipe d'intervention d'urgence pour une réaction immédiate en cas d'alarme.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Formation et Sensibilisation -->
+    <section id="formation" class="py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-10" data-aos="fade-up">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Formation et Sensibilisation</h2>
+                    <div class="w-16 h-1 bg-soges-gold mx-auto mb-6"></div>
+                    <p class="text-gray-700 max-w-3xl mx-auto">
+                        En complément de nos solutions techniques, nous proposons des programmes de formation pour que votre personnel sache réagir efficacement en cas d'incendie.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Formation théorique -->
+                    <div class="bg-soges-light rounded-lg overflow-hidden shadow-lg" data-aos="fade-right">
+                        <div class="h-48 overflow-hidden">
+                            <img src="../images/Formation.jpg" alt="Formation théorique incendie" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-soges-gold mb-3">Formation Théorique</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Connaissance des risques d'incendie</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Types de feux et agents extincteurs adaptés</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Procédures d'évacuation et consignes de sécurité</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Réglementation et obligations légales</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Formation pratique -->
+                    <div class="bg-soges-light rounded-lg overflow-hidden shadow-lg" data-aos="fade-left">
+                        <div class="h-48 overflow-hidden">
+                            <img src="../images/gard.jpg" alt="Formation pratique incendie" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-soges-gold mb-3">Formation Pratique</h3>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Manipulation des extincteurs</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Exercices d'évacuation en conditions réelles</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Simulation de situations d'urgence</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                    <span>Utilisation des équipements de sécurité</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10" data-aos="fade-up">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4">Questions Fréquentes</h2>
+                    <div class="w-16 h-1 bg-soges-gold mx-auto mb-6"></div>
+                </div>
+                
+                <div class="space-y-4 md:space-y-6" data-aos="fade-up" data-aos-delay="100">
+                    <!-- FAQ Item 1 -->
+                    <div x-data="{ open: false }" class="bg-soges-light rounded-lg shadow-md overflow-hidden">
+                        <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left">
+                            <span class="font-semibold">Quelles sont les normes et réglementations en matière de sécurité incendie que vous respectez?</span>
+                            <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-soges-gold"></i>
+                        </button>
+                        <div x-show="open" class="px-6 pb-4 text-gray-700" x-transition>
+                            <p>Nos équipements et installations respectent les normes internationales reconnues en matière de sécurité incendie, notamment les normes ISO, NFPA (National Fire Protection Association) et les réglementations locales en vigueur dans les pays où nous opérons. Nous nous tenons constamment informés des évolutions réglementaires pour garantir la conformité de nos installations.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div x-data="{ open: false }" class="bg-soges-light rounded-lg shadow-md overflow-hidden">
+                        <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left">
+                            <span class="font-semibold">À quelle fréquence les équipements de sécurité incendie doivent-ils être vérifiés et entretenus?</span>
+                            <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-soges-gold"></i>
+                        </button>
+                        <div x-show="open" class="px-6 pb-4 text-gray-700" x-transition>
+                            <p>La fréquence des vérifications dépend du type d'équipement et des réglementations locales. En général, les extincteurs doivent être vérifiés visuellement tous les mois et faire l'objet d'une maintenance approfondie annuelle. Les systèmes d'alarme et de détection nécessitent des tests trimestriels et une maintenance annuelle. Nous proposons des contrats de maintenance adaptés à vos besoins pour assurer la conformité et l'efficacité de vos équipements.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div x-data="{ open: false }" class="bg-soges-light rounded-lg shadow-md overflow-hidden">
+                        <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left">
+                            <span class="font-semibold">Quels types d'établissements peuvent bénéficier de vos services de sécurité incendie?</span>
+                            <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-soges-gold"></i>
+                        </button>
+                        <div x-show="open" class="px-6 pb-4 text-gray-700" x-transition>
+                            <p>Nos services s'adressent à tous types d'établissements: bâtiments administratifs, commerces, hôtels, écoles, hôpitaux, industries, entrepôts, résidences, etc. Chaque type d'établissement présente des risques spécifiques, c'est pourquoi nous proposons des solutions personnalisées après une analyse détaillée de vos locaux et de vos activités.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div x-data="{ open: false }" class="bg-soges-light rounded-lg shadow-md overflow-hidden">
+                        <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left">
+                            <span class="font-semibold">Comment se déroule une formation à la sécurité incendie pour notre personnel?</span>
+                            <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-soges-gold"></i>
+                        </button>
+                        <div x-show="open" class="px-6 pb-4 text-gray-700" x-transition>
+                            <p>Nos formations se déroulent en deux temps: une partie théorique où nous abordons les risques d'incendie, les classes de feu, les moyens d'extinction, et les procédures d'évacuation; puis une partie pratique avec manipulation d'extincteurs, exercices d'évacuation et mise en situation. La formation est adaptée à votre établissement et peut durer de quelques heures à plusieurs jours selon vos besoins. À l'issue de la formation, les participants reçoivent une attestation.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 5 -->
+                    <div x-data="{ open: false }" class="bg-soges-light rounded-lg shadow-md overflow-hidden">
+                        <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left">
+                            <span class="font-semibold">Quels sont les délais d'intervention en cas d'urgence?</span>
+                            <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-soges-gold"></i>
+                        </button>
+                        <div x-show="open" class="px-6 pb-4 text-gray-700" x-transition>
+                            <p>Notre brigade d'intervention est disponible 24h/24 et 7j/7. En cas d'alerte, notre temps d'intervention moyen est de 30 minutes en zone urbaine. Pour les clients sous contrat, nos systèmes d'alerte connectés permettent une réaction immédiate et coordonnée avec les services de secours. Nous proposons également des solutions de télésurveillance pour une sécurité optimale.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-10" data-aos="fade-up" data-aos-delay="200">
+                    <p class="text-gray-700 mb-6">
+                        Vous avez d'autres questions concernant nos services de sécurité incendie? N'hésitez pas à nous contacter.
+                    </p>
+                    <a href="contact.html" class="bg-soges-gold hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-md transition-all inline-flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Nous contacter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section class="py-12 md:py-16 bg-soges-dark relative">
+        <div class="absolute inset-0 opacity-30">
+            <img src="images/incendie.png" alt="Background" class="w-full h-full object-cover">
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4" data-aos="fade-up">Protégez Vos Locaux et Votre Personnel</h2>
+                <p class="text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    La sécurité incendie n'est pas une option mais une nécessité. Contactez-nous dès aujourd'hui pour une évaluation complète de vos besoins et découvrez comment nous pouvons vous aider à protéger ce qui compte le plus.
+                </p>
+                <div class="cta-buttons flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+                    <a href="contact.html" class="bg-soges-gold hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-md transition-all inline-flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Demander un devis
+                    </a>
+                    <a href="tel:+22798380404" class="border-2 border-white text-white hover:bg-white hover:text-soges-dark font-semibold py-3 px-8 rounded-md transition-all inline-flex items-center justify-center">
+                        <i class="fas fa-phone-alt mr-2"></i>
+                        Appeler maintenant
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-soges-dark text-white pt-12 pb-6 sm:pt-16 sm:pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 sm:mb-12">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center mb-4 sm:mb-6">
+                        <img src="images/logo.jpg" alt="Group Soges Logo" class="h-10 w-10 sm:h-12 sm:w-12 object-contain mr-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-soges-gold">GROUP SOGES</h3>
+                            <p class="text-xs text-gray-400">INTERNATIONAL</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        Votre partenaire de confiance pour tous vos besoins de sécurité et d'entretien depuis plus de 14 ans en Afrique de l'Ouest.
+                    </p>
+                    <p class="text-gray-400 font-semibold text-sm">
+                        Votre Sécurité et votre propriété sont notre Affaire
+                    </p>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold text-soges-gold mb-4 sm:mb-6">Contactez-nous</h3>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Quartier Terminus en Face du Ministre de l'Environnement, Niamey, Niger
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                sogesniger_securite@yahoo.com
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                20 33 07 99 / 98 38 04 04
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Lun-Ven: 8h-18h, Sam: 9h-13h
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-soges-gold mb-4 sm:mb-6">Liens Rapides</h3>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="a_propos.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                À propos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="equipement.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Équipements
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold text-soges-gold mb-4 sm:mb-6">Nos Services de Sécurité</h3>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li>
+                            <a href="securite-privee.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Sécurité Site Privé
+                            </a>
+                        </li>
+                        <li>
+                            <a href="securite-publique.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Sécurité Site Public
+                            </a>
+                        </li>
+                        <li>
+                            <a href="videosurveillance.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Vidéosurveillance
+                            </a>
+                        </li>
+                        <li>
+                            <a href="securite-incendie.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Sécurité Incendie
+                            </a>
+                        </li>
+                        <li>
+                            <a href="escorte.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Escorte et Convoyage
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 sm:pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-xs sm:text-sm mb-3 md:mb-0">
+                        © 2025 GROUP SOGES INTERNATIONAL. Tous droits réservés.
+                    </p>
+                    <p class="text-gray-500 text-xs sm:text-sm">
+                        Conçu et développé par <a href="#" class="text-soges-gold hover:underline">NETCRAFTER</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="back-to-top" class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 bg-soges-gold text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg transition-all transform scale-0 hover:bg-opacity-80 z-50">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Initialisation d'Alpine.js pour les menus mobiles
+        document.addEventListener('alpine:init', () => {
+            // Tout est prêt
+        });
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false,
+                disable: window.innerWidth < 768 ? true : false // Disable on mobile for better performance
+            });
+            
+            // Back to Top Button with better performance
+            const backToTopButton = document.getElementById('back-to-top');
+            let isScrolling = false;
+            
+            window.addEventListener('scroll', function() {
+                if (!isScrolling) {
+                    isScrolling = true;
+                    
+                    // Use requestAnimationFrame for smoother animation
+                    requestAnimationFrame(function() {
+                        if (window.pageYOffset > 300) {
+                            backToTopButton.classList.remove('scale-0');
+                            backToTopButton.classList.add('scale-100');
+                        } else {
+                            backToTopButton.classList.remove('scale-100');
+                            backToTopButton.classList.add('scale-0');
+                        }
+                        
+                        isScrolling = false;
+                    });
+                }
+            });
+
+            // Smooth scrolling for anchor links with better performance
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Calculate offset based on screen size
+                        const offset = window.innerWidth < 768 ? 80 : 100;
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add resize listener for better responsiveness
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+                
+                // Update AOS for screen resizes
+                AOS.refresh();
+            });
+        });
+    </script>
+</body>
+</html>

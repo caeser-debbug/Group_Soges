@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sécurité Site Privé - Group Soges International</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.2.0/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/9.2.0/swiper-bundle.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'soges-gold': '#d1a874',
+                        'soges-dark': '#1a202c',
+                        'soges-light': '#f7f7f7',
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7));
+        }
+        
+        .transition-transform {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .service-detail {
+            transition: all 0.3s ease;
+        }
+        
+        .service-detail:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .service-feature {
+            transition: all 0.3s ease;
+        }
+
+        .service-feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            transition: all 0.3s ease;
+        }
+
+        .service-detail:hover .service-icon {
+            color: white;
+            background-color: #d1a874;
+        }
+
+        .group:hover .group-hover\:visible {
+            visibility: visible;
+        }
+
+        .group:hover .group-hover\:opacity-100 {
+            opacity: 1;
+        }
+
+        /* Ajouter une petite flèche au menu déroulant */
+        .group-hover\:visible::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: 12px;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 6px solid white;
+        }
+
+        /* Animation pour le menu mobile */
+        [x-cloak] {
+            display: none !important;
+        }
+
+        /* Responsive text sizing */
+        @media (max-width: 640px) {
+            .page-header h1 {
+                font-size: 1.75rem !important;
+            }
+            
+            .service-detail h3 {
+                font-size: 1.25rem !important;
+            }
+        }
+
+        /* Fix for CTA buttons on small screens */
+        @media (max-width: 480px) {
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .cta-buttons a {
+                width: 100%;
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        /* Service details special styles */
+        .feature-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .service-feature:hover .feature-icon {
+            background-color: #d1a874;
+            color: white;
+        }
+
+        .benefit-item {
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-item:hover {
+            transform: translateX(5px);
+        }
+
+        /* Testimonial card styling */
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Image gallery */
+        .gallery-image {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-image:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+</head>
+<body class="bg-soges-light">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md fixed w-full z-50">
+        <div class="container mx-auto px-4 py-2">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="mr-2 sm:mr-3">
+                        <img src="../images/logo2.jpg" alt="Group Soges Logo" class="h-10 w-10 sm:h-14 sm:w-14 object-contain">
+                    </div>
+                    <div>
+                        <h1 class="text-lg sm:text-xl md:text-2xl font-bold text-soges-gold">GROUP SOGES</h1>
+                        <p class="text-xs md:text-sm text-gray-600 italic">Votre Sécurité et votre propriété sont notre Affaire</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="../index.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">Accueil</a>
+                    <a href="../a_propos.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">À propos</a>
+                    
+                    <!-- Nouveau menu déroulant pour Sécurité -->
+                    <div class="relative group">
+                        <button class="text-gray-800 hover:text-soges-gold font-medium transition-colors flex items-center">
+                            Sécurité
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                            <a href="securite-site-prive.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Sécurité Site Privé</a>
+                            <a href="securite-site-public.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Sécurité Site Public</a>
+                            <a href="securite-videosurvaillance.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Vidéosurveillance</a>
+                            <a href="securite-incendie.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Sécurité Incendie</a>
+                            <a href="escorte-convoyage.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Escorte et Convoyage</a>
+                            <a href="entretien-salubrite.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Entretien et Salubrite</a>
+                            <a href="hydrocarbures.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Hydrocarbures</a>
+                            <a href="formation.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Formation</a>
+                            <a href="btp-hydraulique.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">BTP et Hydraulique</a>
+                            <a href="import-export.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Import-Export</a>
+                            <a href="securite-aeroportuaire.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-soges-gold hover:text-white">Securite aeroportuaire</a>
+                        </div>
+                    </div>
+                    
+                    <a href="../service.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">Services</a>
+                    <a href="../equipement.html" class="text-gray-800 hover:text-soges-gold font-medium transition-colors">Équipements</a>
+                    <a href="../contact.html" class="bg-soges-gold text-white px-4 py-2 rounded hover:bg-opacity-80 transition-all">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden hidden mt-2 pb-2">
+                <a href="../index.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Accueil</a>
+                <a href="../a_propos.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">À propos</a>
+                
+                <!-- Sous-menu Sécurité pour mobile -->
+                <div x-data="{ open: false }">
+                    <button @click="open = !open" class="flex justify-between items-center w-full py-2 text-gray-800 hover:text-soges-gold transition-colors">
+                        Sécurité
+                        <svg class="w-4 h-4 ml-1" :class="{'transform rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div x-show="open" class="pl-4 mt-1 space-y-1">
+                        <a href="securite-site-prive.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Sécurité Site Privé</a>
+                        <a href="securite-site-public.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Sécurité Site Public</a>
+                        <a href="securite-videosurvaillance.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Vidéosurveillance</a>
+                        <a href="securite-incendie.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Sécurité Incendie</a>
+                        <a href="escorte-convoyage.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Escorte et Convoyage</a>
+                        <a href="entretien-salubrite.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Entretien et Salubrite</a>
+                        <a href="hydrocarbures.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Hydrocarbures</a>
+                        <a href="formation.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Formation</a>
+                        <a href="btp-hydraulique.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">BTP et Hydraulique</a>
+                        <a href="import-export.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Import-Export</a>
+                        <a href="securite-aeroportuaire.html" class="block py-1 text-gray-700 hover:text-soges-gold text-sm">Securite aeroportuaire</a>
+                    </div>
+                </div>
+                
+                <a href="../service.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Services</a>
+                <a href="../equipement.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Équipements</a>
+                <a href="../contact.html" class="block py-2 text-gray-800 hover:text-soges-gold transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="pt-24 md:pt-32 pb-10 md:pb-16 bg-soges-dark relative">
+        <div class="absolute inset-0 opacity-30">
+            <img src="../images/toujour pre.jpg" alt="Security Background" class="w-full h-full object-cover">
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="page-header text-center text-white">
+                <h1 class="text-3xl md:text-5xl font-bold mb-4" data-aos="fade-up">Sécurité Site Privé</h1>
+                <div class="w-16 h-1 bg-soges-gold mx-auto mb-4"></div>
+                <p class="text-lg max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Des solutions de sécurité complètes pour protéger votre domicile, vos biens et votre famille
+                </p>
+                <nav class="mt-6 text-sm md:text-base" data-aos="fade-up" data-aos-delay="200">
+                    <ol class="flex justify-center items-center space-x-2">
+                        <li><a href="../index.html" class="hover:text-soges-gold transition-colors">Accueil</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li><a href="../service.html" class="hover:text-soges-gold transition-colors">Services</a></li>
+                        <li><span class="mx-2">/</span></li>
+                        <li class="text-soges-gold">Sécurité Site Privé</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Introduction -->
+    <section class="py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="md:flex items-center gap-8 mb-12">
+                    <div class="md:w-1/2 mb-6 md:mb-0" data-aos="fade-right">
+                        <img src="../images/toujour pre.jpg" alt="Sécurité Site Privé" class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+                    <div class="md:w-1/2" data-aos="fade-left">
+                        <h2 class="text-2xl md:text-3xl font-bold mb-4">Protection Complète de Votre Espace Privé</h2>
+                        <div class="w-16 h-1 bg-soges-gold mb-6"></div>
+                        <p class="text-gray-700 mb-6">
+                            Chez Group Soges International, nous comprenons que la sécurité de votre domicile, de vos biens et de votre famille est primordiale. Notre service de Sécurité Site Privé offre une protection complète et personnalisée pour répondre à vos besoins spécifiques en matière de sécurité.
+                        </p>
+                        <p class="text-gray-700">
+                            Avec plus de 14 ans d'expérience dans le domaine de la sécurité privée, notre équipe d'agents hautement qualifiés et professionnels est prête à vous offrir une tranquillité d'esprit inégalée.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nos Prestations Section -->
+    <section class="py-12 md:py-16 bg-soges-light">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4" data-aos="fade-up">Nos Prestations</h2>
+                <div class="w-16 h-1 bg-soges-gold mx-auto mb-4"></div>
+                <p class="text-gray-700 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    Découvrez notre gamme complète de services de sécurité pour sites privés, conçus pour répondre à tous vos besoins de protection.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Prestation 1 -->
+                <div class="service-feature bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <img src="../images/la force tranquille.jpg" alt="Sécurisation des ménages" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="feature-icon w-12 h-12 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-home text-xl text-soges-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Sécurisation des Ménages</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            Nous offrons un protocole de protection complet pour votre domicile, incluant la surveillance active, le contrôle des accès et l'intervention rapide en cas d'intrusion.
+                        </p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Présence permanente ou intermittente</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Contrôle des entrées et sorties</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Rondes de surveillance</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Prestation 2 -->
+                <div class="service-feature bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="150">
+                    <img src="../images/gard.jpg" alt="Gardiennage professionnel" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="feature-icon w-12 h-12 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user-shield text-xl text-soges-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Gardiennage Professionnel</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            Nos agents de sécurité assurent une surveillance vigilante de vos propriétés, qu'il s'agisse de domiciles, magasins ou entrepôts.
+                        </p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Surveillance 24h/24 et 7j/7</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Personnel formé et expérimenté</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Réponse immédiate aux situations d'urgence</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Prestation 3 -->
+                <div class="service-feature bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <img src="../images/aero.jpg" alt="Sécurité rapprochée VIP" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="feature-icon w-12 h-12 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-user-tie text-xl text-soges-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Sécurité Rapprochée VIP</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            Protection personnelle discrète et efficace pour les personnalités, dirigeants d'entreprise et leurs familles.
+                        </p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Agents hautement qualifiés</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Protection discrète</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Évaluation constante des risques</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Prestation 4 -->
+                <div class="service-feature bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="250">
+                    <img src="../images/intervention.jpg" alt="Escorte et convoyage" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="feature-icon w-12 h-12 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-car text-xl text-soges-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Escorte et Convoyage</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            Services d'escorte sécurisée pour les déplacements en zones à risques, assurant votre protection lors de vos trajets.
+                        </p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Planification d'itinéraire sécurisé</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Véhicules adaptés aux conditions</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Personnel entraîné aux situations d'urgence</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Prestation 5 -->
+                <div class="service-feature bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <img src="../images/toujour pre.jpg" alt="Brigade d'intervention" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="feature-icon w-12 h-12 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-running text-xl text-soges-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Brigade d'Intervention</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            Notre équipe d'intervention rapide est prête à réagir immédiatement en cas d'alerte ou de situation d'urgence.
+                        </p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Temps de réponse minimal</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Équipement spécialisé</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Coordination avec les forces de l'ordre</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Prestation 6 -->
+                <div class="service-feature bg-white rounded-lg shadow-md overflow-hidden" data-aos="fade-up" data-aos-delay="350">
+                    <img src="../images/control.jpg" alt="Contrôle d'accès" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <div class="flex items-start mb-4">
+                            <div class="feature-icon w-12 h-12 bg-soges-gold bg-opacity-20 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-key text-xl text-soges-gold"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">Contrôle d'Accès</h3>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            Gestion et filtrage des accès à votre propriété pour prévenir les entrées non autorisées et assurer votre sécurité.
+                        </p>
+                        <ul class="space-y-2 mb-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Vérification des identités</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Enregistrement des visiteurs</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                <span>Gestion des listes d'autorisation</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Équipements Utilisés -->
+    <section class="py-12 md:py-16 bg-soges-light">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4" data-aos="fade-up">Équipements Utilisés</h2>
+                    <div class="w-16 h-1 bg-soges-gold mx-auto mb-4"></div>
+                    <p class="text-gray-700 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                        Nos agents sont équipés avec des outils professionnels adaptés pour garantir une sécurité optimale.
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Équipements défensifs -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="fade-right">
+                        <div class="p-6">
+                            <div class="flex items-start mb-6">
+                                <div class="w-12 h-12 bg-soges-gold rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-shield-alt text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-bold">Équipements Défensifs</h3>
+                            </div>
+                            <div class="flex">
+                                <div class="w-1/2 pr-4">
+                                    <img src="../images/matraqu.jpg" alt="Équipements défensifs" class="w-full h-48 object-cover rounded-lg shadow-md mb-4">
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                            <span>Matraques professionnelles</span>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                            <span>Équipement de protection</span>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                            <span>Uniformes renforcés</span>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                            <span>Couteaux commando</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="w-1/2 pl-4">
+                                    <p class="text-gray-700 mb-4">
+                                        Nos équipements défensifs permettent à nos agents d'intervenir efficacement tout en assurant leur sécurité et celle des personnes protégées.
+                                    </p>
+                                    <p class="text-gray-700 mb-4">
+                                        Chaque agent est formé à l'utilisation appropriée de ces équipements dans le respect des lois et réglementations en vigueur.
+                                    </p>
+                                    <img src="../images/agent-securite-aeroport-souriant-tenant-detecteur-metaux-dans-terminal-aeroport_107420-95848.avif" alt="Agent avec équipement" class="w-full h-32 object-cover rounded-lg shadow-md">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Équipements de communication et détection -->
+                    <div class="bg-white rounded-lg shadow-lg overflow-hidden" data-aos="fade-left">
+                        <div class="p-6">
+                            <div class="flex items-start mb-6">
+                                <div class="w-12 h-12 bg-soges-gold rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-broadcast-tower text-white"></i>
+                                </div>
+                                <h3 class="text-xl font-bold">Communication et Détection</h3>
+                            </div>
+                            <div class="flex">
+                                <div class="w-1/2 pr-4">
+                                    <img src="../images/talkie1.jpg" alt="Équipements de communication" class="w-full h-48 object-cover rounded-lg shadow-md mb-4">
+                                    <ul class="space-y-2">
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                            <span>Talkie-walkies professionnels</span>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                            <span>Téléphones cellulaires</span>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                            <span>Détecteurs de métaux</span>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                            <span>Lampes puissantes</span>
+                                        </li>
+                                        <li class="flex items-center">
+                                            <i class="fas fa-check-circle text-soges-gold mr-2"></i>
+                                            <span>Sifflets d'alerte</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="w-1/2 pl-4">
+                                    <p class="text-gray-700 mb-4">
+                                        Nos équipements de communication permettent une coordination parfaite entre nos agents et notre centre de contrôle, garantissant une réponse rapide à tout incident.
+                                    </p>
+                                    <p class="text-gray-700 mb-4">
+                                        Les outils de détection nous permettent d'identifier rapidement les menaces potentielles avant qu'elles ne deviennent problématiques.
+                                    </p>
+                                    <img src="../images/talki.jpg" alt="Communication sécurité" class="w-full h-32 object-cover rounded-lg shadow-md">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Avantages de nos services -->
+    <section class="py-12 md:py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4" data-aos="fade-up">Les Avantages de Nos Services</h2>
+                    <div class="w-16 h-1 bg-soges-gold mx-auto mb-4"></div>
+                    <p class="text-gray-700 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                        Découvrez pourquoi choisir Group Soges International pour la sécurité de votre site privé.
+                    </p>
+                </div>
+                
+                <div class="md:flex gap-8">
+                    <div class="md:w-1/2 mb-8 md:mb-0" data-aos="fade-right">
+                        <img src="../images/equipe.jpg" alt="Équipe de sécurité" class="w-full h-auto rounded-lg shadow-lg">
+                    </div>
+                    <div class="md:w-1/2" data-aos="fade-left">
+                        <div class="space-y-6">
+                            <div class="benefit-item">
+                                <h3 class="text-xl font-bold mb-2 flex items-center">
+                                    <i class="fas fa-user-shield text-soges-gold mr-3"></i>
+                                    Personnel Hautement Qualifié
+                                </h3>
+                                <p class="text-gray-700 ml-9">
+                                    Nos agents sont rigoureusement sélectionnés, formés et certifiés pour assurer les missions de sécurité les plus exigeantes.
+                                </p>
+                            </div>
+                            <div class="benefit-item">
+                                <h3 class="text-xl font-bold mb-2 flex items-center">
+                                    <i class="fas fa-clock text-soges-gold mr-3"></i>
+                                    Disponibilité 24h/24 et 7j/7
+                                </h3>
+                                <p class="text-gray-700 ml-9">
+                                    Notre service de sécurité est opérationnel en permanence, garantissant une protection constante de votre site privé.
+                                </p>
+                            </div>
+                            <div class="benefit-item">
+                                <h3 class="text-xl font-bold mb-2 flex items-center">
+                                    <i class="fas fa-cogs text-soges-gold mr-3"></i>
+                                    Solutions Personnalisées
+                                </h3>
+                                <p class="text-gray-700 ml-9">
+                                    Nous adaptons nos services à vos besoins spécifiques, en tenant compte des particularités de votre site et de vos exigences.
+                                </p>
+                            </div>
+                            <div class="benefit-item">
+                                <h3 class="text-xl font-bold mb-2 flex items-center">
+                                    <i class="fas fa-bolt text-soges-gold mr-3"></i>
+                                    Intervention Rapide
+                                </h3>
+                                <p class="text-gray-700 ml-9">
+                                    Notre brigade d'intervention est prête à réagir rapidement à toute situation d'urgence, minimisant les risques potentiels.
+                                </p>
+                            </div>
+                            <div class="benefit-item">
+                                <h3 class="text-xl font-bold mb-2 flex items-center">
+                                    <i class="fas fa-chart-line text-soges-gold mr-3"></i>
+                                    Expérience Éprouvée
+                                </h3>
+                                <p class="text-gray-700 ml-9">
+                                    Avec plus de 14 ans d'expérience dans le secteur de la sécurité, nous avons développé une expertise solide et une connaissance approfondie des enjeux sécuritaires.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-12 md:py-16 bg-soges-light">
+        <div class="container mx-autopx-4">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4" data-aos="fade-up">Questions Fréquentes</h2>
+                    <div class="w-16 h-1 bg-soges-gold mx-auto mb-4"></div>
+                    <p class="text-gray-700 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+                        Retrouvez les réponses aux questions les plus fréquentes concernant nos services de sécurité site privé.
+                    </p>
+                </div>
+                
+                <div class="space-y-4 md:space-y-6" data-aos="fade-up" data-aos-delay="100">
+                    <!-- FAQ Item 1 -->
+                    <div x-data="{ open: false }" class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left">
+                            <span class="font-semibold">Quel est le délai pour la mise en place d'un service de sécurité pour mon domicile?</span>
+                            <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-soges-gold"></i>
+                        </button>
+                        <div x-show="open" class="px-6 pb-4 text-gray-700" x-transition>
+                            <p>Nous pouvons déployer nos agents de sécurité dans un délai de 24 à 48 heures après la signature du contrat. Pour une solution complète incluant l'évaluation initiale et la mise en place d'un plan de sécurité personnalisé, comptez environ 3 à 5 jours.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div x-data="{ open: false }" class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left">
+                            <span class="font-semibold">Vos agents sont-ils formés pour gérer des situations d'urgence?</span>
+                            <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-soges-gold"></i>
+                        </button>
+                        <div x-show="open" class="px-6 pb-4 text-gray-700" x-transition>
+                            <p>Absolument. Tous nos agents suivent une formation rigoureuse qui inclut la gestion des situations d'urgence, les premiers secours, la lutte contre les incendies et les protocoles d'évacuation. Ils participent également à des exercices de simulation réguliers pour maintenir leurs compétences à jour.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div x-data="{ open: false }" class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left">
+                            <span class="font-semibold">Comment est organisée la surveillance de mon domicile pendant mon absence?</span>
+                            <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-soges-gold"></i>
+                        </button>
+                        <div x-show="open" class="px-6 pb-4 text-gray-700" x-transition>
+                            <p>Nous mettons en place un protocole de surveillance renforcé pendant votre absence, comprenant des rondes régulières à l'intérieur et à l'extérieur de votre propriété, la vérification des points d'accès, et une vigilance accrue. Nous pouvons également vous envoyer des rapports quotidiens et vous alerter immédiatement en cas d'incident.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 4 -->
+                    <div x-data="{ open: false }" class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left">
+                            <span class="font-semibold">Proposez-vous des contrats de service flexibles?</span>
+                            <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-soges-gold"></i>
+                        </button>
+                        <div x-show="open" class="px-6 pb-4 text-gray-700" x-transition>
+                            <p>Oui, nous proposons différentes formules adaptées à vos besoins: contrats ponctuels (pour une absence temporaire), contrats à court terme (1 à 3 mois) ou engagements à long terme. Nous établissons toujours un devis personnalisé après évaluation de vos besoins spécifiques.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 5 -->
+                    <div x-data="{ open: false }" class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <button @click="open = !open" class="flex justify-between items-center w-full px-6 py-4 text-left">
+                            <span class="font-semibold">Comment sont sélectionnés et vérifiés vos agents de sécurité?</span>
+                            <i :class="open ? 'fas fa-chevron-up' : 'fas fa-chevron-down'" class="text-soges-gold"></i>
+                        </button>
+                        <div x-show="open" class="px-6 pb-4 text-gray-700" x-transition>
+                            <p>Notre processus de recrutement est rigoureux et comprend la vérification des antécédents, des références professionnelles, et des qualifications. Chaque agent passe par une série d'entretiens et doit réussir des évaluations physiques et psychologiques. Seuls les candidats répondant à nos standards élevés rejoignent notre équipe et bénéficient ensuite d'une formation continue.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-10" data-aos="fade-up" data-aos-delay="200">
+                    <p class="text-gray-700 mb-6">
+                        Vous avez d'autres questions concernant nos services de sécurité site privé? N'hésitez pas à nous contacter.
+                    </p>
+                    <a href="contact.html" class="bg-soges-gold hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-md transition-all inline-flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Nous contacter
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section class="py-12 md:py-16 bg-soges-dark relative">
+        <div class="absolute inset-0 opacity-20">
+            <img src="images/toujour pre.jpg" alt="Background" class="w-full h-full object-cover">
+        </div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-4" data-aos="fade-up">Besoin d'une Solution de Sécurité Personnalisée?</h2>
+                <p class="text-gray-300 mb-8" data-aos="fade-up" data-aos-delay="100">
+                    Contactez-nous dès aujourd'hui pour une évaluation gratuite de vos besoins en sécurité et découvrez comment nous pouvons protéger votre domicile, vos biens et votre famille.
+                </p>
+                <div class="cta-buttons flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center" data-aos="fade-up" data-aos-delay="200">
+                    <a href="contact.html" class="bg-soges-gold hover:bg-opacity-80 text-white font-semibold py-3 px-8 rounded-md transition-all inline-flex items-center justify-center">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Demander un devis gratuit
+                    </a>
+                    <a href="tel:+22798380404" class="border-2 border-white text-white hover:bg-white hover:text-soges-dark font-semibold py-3 px-8 rounded-md transition-all inline-flex items-center justify-center">
+                        <i class="fas fa-phone-alt mr-2"></i>
+                        Appeler maintenant
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-soges-dark text-white pt-12 pb-6 sm:pt-16 sm:pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8 sm:mb-12">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center mb-4 sm:mb-6">
+                        <img src="images/logo.jpg" alt="Group Soges Logo" class="h-10 w-10 sm:h-12 sm:w-12 object-contain mr-3">
+                        <div>
+                            <h3 class="text-lg font-bold text-soges-gold">GROUP SOGES</h3>
+                            <p class="text-xs text-gray-400">INTERNATIONAL</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-4 text-sm">
+                        Votre partenaire de confiance pour tous vos besoins de sécurité et d'entretien depuis plus de 14 ans en Afrique de l'Ouest.
+                    </p>
+                    <p class="text-gray-400 font-semibold text-sm">
+                        Votre Sécurité et votre propriété sont notre Affaire
+                    </p>
+                </div>
+                <!-- Contact -->
+                <div>
+                    <h3 class="text-lg font-bold text-soges-gold mb-4 sm:mb-6">Contactez-nous</h3>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Quartier Terminus en Face du Ministre de l'Environnement, Niamey, Niger
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                sogesniger_securite@yahoo.com
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                20 33 07 99 / 98 38 04 04
+                            </p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-soges-gold mr-2 sm:mr-3 mt-1">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <p class="text-gray-400 text-sm">
+                                Lun-Ven: 8h-18h, Sam: 9h-13h
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-bold text-soges-gold mb-4 sm:mb-6">Liens Rapides</h3>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="a_propos.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                À propos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="services.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="equipement.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Équipements
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contact.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Services -->
+                <div>
+                    <h3 class="text-lg font-bold text-soges-gold mb-4 sm:mb-6">Nos Services de Sécurité</h3>
+                    <ul class="space-y-2 sm:space-y-3">
+                        <li>
+                            <a href="securite-privee.html" class="text-white hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Sécurité Site Privé
+                            </a>
+                        </li>
+                        <li>
+                            <a href="securite-publique.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Sécurité Site Public
+                            </a>
+                        </li>
+                        <li>
+                            <a href="videosurveillance.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Vidéosurveillance
+                            </a>
+                        </li>
+                        <li>
+                            <a href="securite-incendie.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Sécurité Incendie
+                            </a>
+                        </li>
+                        <li>
+                            <a href="escorte.html" class="text-gray-400 hover:text-soges-gold transition-colors text-sm">
+                                <i class="fas fa-chevron-right mr-2 text-soges-gold"></i>
+                                Escorte et Convoyage
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-6 sm:pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-500 text-xs sm:text-sm mb-3 md:mb-0">
+                        © 2025 GROUP SOGES INTERNATIONAL. Tous droits réservés.
+                    </p>
+                    <p class="text-gray-500 text-xs sm:text-sm">
+                        Conçu et développé par <a href="#" class="text-soges-gold hover:underline">NETCRAFTER</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" id="back-to-top" class="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 bg-soges-gold text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shadow-lg transition-all transform scale-0 hover:bg-opacity-80 z-50">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Initialisation d'Alpine.js pour les menus mobiles
+        document.addEventListener('alpine:init', () => {
+            // Tout est prêt
+        });
+
+        // Mobile Menu Toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                mirror: false,
+                disable: window.innerWidth < 768 ? true : false // Disable on mobile for better performance
+            });
+            
+            // Back to Top Button with better performance
+            const backToTopButton = document.getElementById('back-to-top');
+            let isScrolling = false;
+            
+            window.addEventListener('scroll', function() {
+                if (!isScrolling) {
+                    isScrolling = true;
+                    
+                    // Use requestAnimationFrame for smoother animation
+                    requestAnimationFrame(function() {
+                        if (window.pageYOffset > 300) {
+                            backToTopButton.classList.remove('scale-0');
+                            backToTopButton.classList.add('scale-100');
+                        } else {
+                            backToTopButton.classList.remove('scale-100');
+                            backToTopButton.classList.add('scale-0');
+                        }
+                        
+                        isScrolling = false;
+                    });
+                }
+            });
+
+            // Smooth scrolling for anchor links with better performance
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Calculate offset based on screen size
+                        const offset = window.innerWidth < 768 ? 80 : 100;
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - offset,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add resize listener for better responsiveness
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 768) {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+                
+                // Update AOS for screen resizes
+                AOS.refresh();
+            });
+            
+            // Initialize image gallery (you can expand this to create a lightbox effect)
+            document.querySelectorAll('.gallery-image').forEach(item => {
+                item.addEventListener('click', function() {
+                    // Add lightbox functionality if needed
+                    console.log('Image clicked:', this.querySelector('img').src);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
